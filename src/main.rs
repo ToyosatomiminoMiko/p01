@@ -1,9 +1,9 @@
 use std::{
     env, fs,
     io::{self, Error, Write},
+    str::Chars,
     thread,
     time::Duration,
-    str::Chars
 };
 
 macro_rules! printf {
@@ -20,15 +20,12 @@ macro_rules! printf {
 
 fn tnop(s: &str, t: u64) {
     let mut chars: Chars = s.chars();
-    //let mut wrap: u8 = 0;
-    
     loop {
         //printf!("{}", chars.next().unwrap());
         let char: Option<char> = chars.next();
         match char {
             Some(char) => {
                 printf!("{}", char);
-                //wrap += 1;
                 thread::sleep(Duration::from_millis(t));
             }
             None => break,
@@ -37,15 +34,13 @@ fn tnop(s: &str, t: u64) {
 }
 
 fn string_to_static_str(s: String) -> &'static str {
-    /*
-    将`String`转换为`&str`
-    */
+    // 将`String`转换为`&str`
     Box::leak(s.into_boxed_str())
 }
 
 /*
 ```shell
-cargo run ./tno.txt 250
+cargo run ./text 250
 ```
 */
 fn main() -> Result<(), Error> {
