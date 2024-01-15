@@ -27,7 +27,7 @@ fn tnop(s: &str, t: u64) {
             Some(char) => {
                 printf!("{}", char);
                 thread::sleep(Duration::from_millis(t));
-            }
+            },
             None => break,
         }
     }
